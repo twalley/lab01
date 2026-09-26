@@ -52,8 +52,8 @@ def is_number(token):
 def infix_to_postfix(tokens):
     # Переводит токены в обратную польскую нотацию (ОПН).
     precedence = {'+': 1, '-': 1, '*': 2, '/': 2}
-    output = []
-    operators = []
+    output = [] # Список для итогового выражения в ОПН
+    operators = [] # Стек для временного хранения операторов и скобок
     
     for token in tokens:
         if is_number(token):
