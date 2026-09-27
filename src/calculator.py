@@ -56,7 +56,7 @@ def infix_to_postfix(tokens):
     operators = [] # Стек для временного хранения операторов и скобок
     
     for token in tokens:
-        if is_number(token):
+        if is_number(token): # Если токен это число, сразу добавляем его в список ОПН
             output.append(token)
         elif token == '(':
             operators.append(token)
@@ -122,7 +122,8 @@ if __name__ == "__main__":
         "2+a",
         "1/0",
         "2-+1",
-        "2*(3+-4)"
+        "2*(3+-4)",
+        "2.34+-9*(12+1)"
     ]
     
     for ex in examples:
