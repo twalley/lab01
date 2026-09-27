@@ -1,19 +1,19 @@
-# Словари коэффициентов перевода в базовые единицы (в метры и в граммы)
-LENGTH_COEFS = {
+# словари коэффициентов перевода в базовые единицы (в метры и в граммы)
+length_coefs = {
     "mm": 0.001,
     "cm": 0.01,
     "m": 1.0,
     "km": 1000.0
 }
 
-MASS_COEFS = {
+mass_coefs = {
     "g": 1.0,
     "kg": 1000.0
 }
 
-# Отдельная функция для перевода температур
+# отдельная функция для перевода температур
 def convert_temp(value, from_unit, to_unit):
-    # Сначала переводим всё в Кельвины
+    # сначала переводим всё в Кельвины
     if from_unit == "c":
         k = value + 273.15
     elif from_unit == "f":
@@ -21,7 +21,7 @@ def convert_temp(value, from_unit, to_unit):
     else:
         k = value
 
-    # Задаем погрешность, в одну тысячную градуса
+    # задаем погрешность, в одну тысячную градуса
     if k < -0.001:
         raise RuntimeError("Ошибка: температура ниже абсолютного нуля!")
 
@@ -36,7 +36,7 @@ def convert_temp(value, from_unit, to_unit):
 
 
 def convert(value, from_unit, to_unit):
-    # Убираем пробелы по краям и переводим в нижний регистр
+    # убираем пробелы по краям и переводим в нижний регистр
     u_from = from_unit.strip().lower()
     u_to = to_unit.strip().lower()
 
@@ -50,22 +50,22 @@ def convert(value, from_unit, to_unit):
         return float(convert_temp(value, u_from, u_to))
 
     # Если это группа длины
-    if u_from in LENGTH_COEFS and u_to in LENGTH_COEFS:
+    if u_from in length_coefs and u_to in length_coefs:
         # Переводим исходное значение в метры, а потом делим на коэффициент целевой единицы
-        value_in_meters = value * LENGTH_COEFS[u_from]
-        result = value_in_meters / LENGTH_COEFS[u_to]
+        value_in_meters = value * length_coefs[u_from]
+        result = value_in_meters / length_coefs[u_to]
         return float(result)
 
     # Если это группа массы
-    if u_from in MASS_COEFS and u_to in MASS_COEFS:
+    if u_from in mass_coefs and u_to in mass_coefs:
         # Переводим исходное значение в граммы, а потом делим на коэффициент целевой единицы
-        value_in_grams = value * MASS_COEFS[u_from]
-        result = value_in_grams / MASS_COEFS[u_to]
+        value_in_grams = value * mass_coefs[u_from]
+        result = value_in_grams / mass_coefs[u_to]
         return float(result)
 
     # Если мы дошли сюда, значит либо единицы неизвестны, либо они из разных групп (например, kg и m)
     # Сначала проверяем, существуют ли вообще такие единицы
-    all_known_units = set(LENGTH_COEFS.keys()) | set(MASS_COEFS.keys()) | temp_units
+    all_known_units = set(length_coefs.keys()) | set(mass_coefs.keys()) | temp_units
     if u_from not in all_known_units or u_to not in all_known_units:
         raise RuntimeError(f"Неизвестная единица: {from_unit} или {to_unit}")
         
