@@ -1,5 +1,5 @@
 def tokenize(expression):
-    #Разбиваем строку на числа (включая отрицательные), операторы и скобки.
+    # Разбиваем строку на числа (включая отрицательные), операторы и скобки.
     tokens = []
     current_number = []
     
@@ -32,7 +32,7 @@ def tokenize(expression):
                 tokens.append(''.join(current_number))
                 current_number = []
             tokens.append(char)
-            # Текущий символ не является оператором, числом, скобкой или точкой -> кидаем ошибку что символ неизвестен
+            # Текущий символ не является оператором, числом, скобкой или точкой -> кидаем ошибку, что символ неизвестен
         else:
             raise RuntimeError(f'Ошибка - неизвестный символ')
             
@@ -105,32 +105,3 @@ def calculate(expression):
     postfix = infix_to_postfix(tokens)
     result = evaluate_postfix(postfix)
     return result
-
-# def calculate(expression):
-#     try:
-#         tokens = tokenize(expression)
-#         # print(tokens)
-#         postfix = infix_to_postfix(tokens)
-#         # print(postfix)
-#         result = evaluate_postfix(postfix)
-#         return result
-#     except Exception as e:
-#         return f"{e}"
-
-# # Примеры тестов:
-# if __name__ == "__main__":
-#     examples = [
-#         "2+3*4",
-#         "10 / 4",
-#         "-2 * -3",
-#         "1+-2",
-#         "2*/3",
-#         "2+a",
-#         "1/0",
-#         "2-+1",
-#         "2*(3+-4)",
-#         "2.34+-9*(12+1)"
-#     ]
-    
-#     for ex in examples:
-#         print(f"Выражение: {ex} => Результат: {calculate(ex)}")
