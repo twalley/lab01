@@ -39,7 +39,7 @@ def main():
     if hasattr(args, 'func'):
         args.func(args)
     else:
-        # если запущено без аргументов (например, просто python3 -m toolkit), выводим help
+        # если запущено без аргументов, выводим help
         parser.print_help()
 
 if __name__ == '__main__':

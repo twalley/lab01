@@ -63,11 +63,11 @@ def convert(value, from_unit, to_unit):
         result = value_in_grams / mass_coefs[u_to]
         return float(result)
 
-    # Если мы дошли сюда, значит либо единицы неизвестны, либо они из разных групп (например, kg и m)
+    # Если мы дошли сюда, значит либо единицы неизвестны, либо они из разных групп
     # Сначала проверяем, существуют ли вообще такие единицы
     all_known_units = set(length_coefs.keys()) | set(mass_coefs.keys()) | temp_units
     if u_from not in all_known_units or u_to not in all_known_units:
         raise RuntimeError(f"Неизвестная единица: {from_unit} или {to_unit}")
         
-    # Если они существуют, но не попали в `if` выше — значит они из разных групп
+    # Если они существуют, но не попали в if выше —> значит они из разных групп
     raise RuntimeError(f"Несовместимые единицы: {from_unit} и {to_unit}")
