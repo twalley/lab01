@@ -1,5 +1,5 @@
 def tokenize(expression):
-    #Разбиваеv строку на числа (включая отрицательные), операторы и скобки.
+    #Разбиваем строку на числа (включая отрицательные), операторы и скобки.
     tokens = []
     current_number = []
     
@@ -50,7 +50,7 @@ def is_number(token):
         return False
 
 def infix_to_postfix(tokens):
-    # Переводит токены в обратную польскую нотацию (ОПН).
+    # Переводит токены в обратную польскую нотацию
     precedence = {'+': 1, '-': 1, '*': 2, '/': 2}
     output = [] # Список для итогового выражения в ОПН
     operators = [] # Стек для временного хранения операторов и скобок
@@ -95,36 +95,42 @@ def evaluate_postfix(postfix_tokens):
                 stack.append(a * b)
             elif token == '/':
                 if b == 0:
-                    raise ZeroDivisionError("Ошибка - деление на ноль!")
+                    raise ZeroDivisionError("Ошибка - деление на ноль")
                 stack.append(a / b)
                 
     return stack[0] if stack else 0
 
 def calculate(expression):
-    try:
-        tokens = tokenize(expression)
-        # print(tokens)
-        postfix = infix_to_postfix(tokens)
-        # print(postfix)
-        result = evaluate_postfix(postfix)
-        return result
-    except Exception as e:
-        return f"{e}"
+    tokens = tokenize(expression)
+    postfix = infix_to_postfix(tokens)
+    result = evaluate_postfix(postfix)
+    return result
 
-# Примеры тестов:
-if __name__ == "__main__":
-    examples = [
-        "2+3*4",
-        "10 / 4",
-        "-2 * -3",
-        "1+-2",
-        "2*/3",
-        "2+a",
-        "1/0",
-        "2-+1",
-        "2*(3+-4)",
-        "2.34+-9*(12+1)"
-    ]
+# def calculate(expression):
+#     try:
+#         tokens = tokenize(expression)
+#         # print(tokens)
+#         postfix = infix_to_postfix(tokens)
+#         # print(postfix)
+#         result = evaluate_postfix(postfix)
+#         return result
+#     except Exception as e:
+#         return f"{e}"
+
+# # Примеры тестов:
+# if __name__ == "__main__":
+#     examples = [
+#         "2+3*4",
+#         "10 / 4",
+#         "-2 * -3",
+#         "1+-2",
+#         "2*/3",
+#         "2+a",
+#         "1/0",
+#         "2-+1",
+#         "2*(3+-4)",
+#         "2.34+-9*(12+1)"
+#     ]
     
-    for ex in examples:
-        print(f"Выражение: {ex} => Результат: {calculate(ex)}")
+#     for ex in examples:
+#         print(f"Выражение: {ex} => Результат: {calculate(ex)}")
