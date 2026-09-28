@@ -23,7 +23,7 @@ def convert_temp(value, from_unit, to_unit):
 
     # задаем погрешность, в одну тысячную градуса
     if k < -0.001:
-        raise RuntimeError("Ошибка: температура ниже абсолютного нуля!")
+        raise RuntimeError("Ошибка: температура ниже абсолютного нуля")
 
 
     # Из Кельвинов переводим в нужную единицу
@@ -71,25 +71,3 @@ def convert(value, from_unit, to_unit):
         
     # Если они существуют, но не попали в `if` выше — значит они из разных групп
     raise RuntimeError(f"Несовместимые единицы: {from_unit} и {to_unit}")
-
-
-# Примеры тестов
-if __name__ == "__main__":
-    # Список тестов в формате: (значение, из_чего, во_что)
-    examples = [
-        (1000, "mm", "m"),
-        (1.5, "kg", "g"),
-        (0, "c", "f"),
-        (-273.15, "c", "k"),
-        (10, "KG", "g"),
-        (-300, "c", "k"),
-        (10, "kg", "m"),
-        (5, "m", "abc")
-    ]
-    
-    for val, frm, to in examples:
-        try:
-            res = convert(val, frm, to)
-            print(f'Ввод: {val} {frm} -> {to} | Результат: {res}')
-        except RuntimeError as e:
-            print(f'Ввод: {val} {frm} -> {to} | {e}')
