@@ -44,4 +44,5 @@ def main():
 
 if __name__ == '__main__':
     main()
-# нужно прописать в консоль source .venv/bin/activate
+# нужно прописать в консоль source .venv/bin/activate для мака, .venv\Scripts\activate для винды
+# чтобы запустить ввод с клавиатуры python -m toolkit calculator "выражение", python -m toolkit converter число --from от куда --to куда
