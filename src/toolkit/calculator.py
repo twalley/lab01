@@ -2,10 +2,8 @@ def tokenize(expression):
     # Разбиваем строку на числа (включая отрицательные), операторы и скобки.
     tokens = []
     current_number = []
-    
     # Очищаем строку от пробелов
     expression = expression.replace(" ", "")
-    
     for i, char in enumerate(expression):
         # Проверяем, является ли минус знаком отрицательного числа
         if char == '-':
@@ -51,7 +49,7 @@ def is_number(token):
 
 def infix_to_postfix(tokens):
     # Переводит токены в обратную польскую нотацию
-    precedence = {'+': 1, '-': 1, '*': 2, '/': 2}
+    prioritet = {'+': 1, '-': 1, '*': 2, '/': 2}
     output = [] # Список для итогового выражения в ОПН
     operators = [] # Стек для временного хранения операторов и скобок
     
@@ -65,9 +63,9 @@ def infix_to_postfix(tokens):
                 output.append(operators.pop())
             if operators and operators[-1] == '(':
                 operators.pop()
-        elif token in precedence:
-            while (operators and operators[-1] in precedence and 
-                   precedence[operators[-1]] >= precedence[token]):
+        elif token in prioritet:
+            while (operators and operators[-1] in prioritet and 
+                   prioritet[operators[-1]] >= prioritet[token]):
                 output.append(operators.pop())
             operators.append(token)
             
