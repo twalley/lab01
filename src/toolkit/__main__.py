@@ -36,11 +36,11 @@ def main():
     args = parser.parse_args()
     
     # проверяем, выбрана ли подкоманда (calc или convert)
-    if args.command == 'calculator':
-    calculat(args)
-elif args.command == 'converter':
-    convertat(args)
-
+    if hasattr(args, 'func'):
+        args.func(args)
+    else:
+        # если запущено без аргументов, выводим help
+        parser.print_help()
 
 if __name__ == '__main__':
     main()
